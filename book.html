@@ -11,7 +11,7 @@ body {
   display:flex;
   justify-content:center;
   align-items:center;
-  background:transparent;
+  background:url("assets/bg.jpeg");
   font-family:Arial, sans-serif;
 }
 .book-wrapper {
@@ -68,7 +68,7 @@ body {
   font-size:26px;
   font-weight:bold;
   color:white;
-  background:#3b2f2f;
+  background:#e8bcbc;
 }
 .controls {
   position:absolute;
@@ -80,8 +80,8 @@ body {
 button {
   padding:10px 24px;
   border:none;
-  background:#222;
-  color:white;
+  background:#e8bcbc;
+  color:rgb(52, 45, 45);
   border-radius:5px;
   cursor:pointer;
 }
@@ -94,7 +94,10 @@ button {
 
     <!-- FRONT COVER -->
     <div class="page cover">
-      <div class="front">My Novel</div>
+      <div class="front">
+        <img src="assets/coverpage2.jpeg" alt="Front COVER">
+      </div>
+      
       <div class="back">My Novel</div>
     </div>
 
@@ -136,7 +139,7 @@ button {
         <img src="assets/madamji4.jpeg" alt="Photo">
       </div>
       <div class="back">
-        <h3>Chapter 3</h3>
+        <h3>Chapter 4</h3>
         <p>If I want to define myself, I first have to say, ‘I am a woman’; all other assertions will arise from this basic truth. A man never begins by positing himself as an individual of a certain sex: that he is a man is obvious.” — Simone de Beauvoir, The Second Sex</p>
       </div>
     </div>
@@ -146,7 +149,7 @@ button {
         <img src="assets/madamji5.jpeg" alt="Photo">
       </div>
       <div class="back">
-        <h3>Chapter 3</h3>
+        <h3>Chapter 5</h3>
         <p>Women are the quiet strength that holds the world together—resilient yet gentle, powerful yet compassionate. They carry dreams in their hearts and courage in their souls, turning pain into wisdom and struggle into grace. In every role they take on, they bring warmth, intelligence, and an unbreakable spirit, shaping lives with love and determination. To appreciate women is to honor endurance, empathy, and the endless ability to rise, again and again, with dignity and light.</p>
       </div>
     </div>
@@ -154,7 +157,9 @@ button {
     <!-- BACK COVER -->
     <div class="page cover">
       <div class="front">The End</div>
-      <div class="back">The End</div>
+      <div class="back">
+        <img src="assets/backcover3.jpeg" alt="Photo">
+      </div>
     </div>
 
   </div>
@@ -182,8 +187,10 @@ function prevPage() {
     current--;
     pages[current].classList.remove('flipped');
     pages[current].style.zIndex = pages.length - current;
+    window.location.href = "letter.html";
   }
 }
+
 </script>
 
 </body>

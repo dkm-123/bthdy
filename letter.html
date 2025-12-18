@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confession Letter</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:url("assets/bg.jpeg");
+  font-family:Georgia, serif;
+}
+
+/* PAGE */
+.page{
+  width:420px;
+  min-height:520px;
+  background:#fdfcf8;
+  padding:40px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.4);
+  border-radius:6px;
+  line-height:1.8;
+  font-size:18px;
+  white-space:pre-line;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;   /* 🔑 start from top */
+}
+
+
+/* LOCK SCREEN */
+#lock{
+  text-align:center;
+}
+
+input, button{
+  padding:10px;
+  border:none;
+  border-radius:5px;
+  margin-top:10px;
+  font-size:16px;
+}
+
+button{
+  background:#e11d48;
+  color:white;
+  cursor:pointer;
+}
+
+#error{
+  color:#dc2626;
+  margin-top:10px;
+}
+
+/* LETTER */
+#letter{
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <div id="lock">
+    <h3>Enter Password 💌</h3>
+    <input type="password" id="pw" placeholder="Password">
+    <button onclick="unlock()">Open Letter</button>
+    <p id="error"></p>
+  </div>
+
+  <div id="letter"></div>
+
+</div>
+
+<script>
+const PASSWORD = "love"; // change password here
+
+const lines = [
+  "I don’t know how to begin,",
+  "",
+  "but every thought of mine",
+  "quietly leads back to you.",
+  "",
+  "This isn’t a poem or a plan,",
+  "just something my heart kept safe.",
+  "",
+  "— Always yours"
+];
+
+let line = 0, char = 0;
+const letter = document.getElementById("letter");
+
+function unlock(){
+  if(pw.value === PASSWORD){
+    lock.style.display = "none";
+    letter.style.display = "block";
+    typeText();
+  } else {
+    error.textContent = "Wrong password ❌";
+  }
+}
+
+function typeText(){
+  if(line < lines.length){
+    if(char < lines[line].length){
+      letter.textContent += lines[line][char++];
+      setTimeout(typeText, 50);      // typing speed
+    } else {
+      letter.textContent += "\n";
+      line++;
+      char = 0;
+      setTimeout(typeText, 600);     // line delay
+    }
+  }
+}
+</script>
+
+</body>
+</html>
