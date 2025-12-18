@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Novel-Style Book</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:transparent;
+  font-family:Arial, sans-serif;
+}
+.book-wrapper {
+  perspective:2000px;
+  width:320px;
+  height:400px;
+  position: relative;
+}
+.book {
+  position:relative;
+  width:100%;
+  height:100%;
+}
+.page {
+  position:absolute;
+  width:100%;
+  height:100%;
+  transform-origin:left center;
+  transform-style:preserve-3d;
+  transition:transform 1.2s ease;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
+  border:1px solid #ddd;
+  border-radius:4px;
+}
+.page.flipped {
+  transform: rotateY(-180deg);
+}
+.page .front, .page .back {
+  position:absolute;
+  width:100%;
+  height:100%;
+  backface-visibility:hidden;
+  overflow:hidden;
+}
+.page .front {
+  background:white;
+}
+.page .front img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.page .back {
+  background:#fafafa;
+  transform:rotateY(180deg);
+  padding:30px;
+  font-size:16px;
+  line-height:1.5;
+}
+.cover .front, .cover .back {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:26px;
+  font-weight:bold;
+  color:white;
+  background:#3b2f2f;
+}
+.controls {
+  position:absolute;
+  bottom:-70px;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+}
+button {
+  padding:10px 24px;
+  border:none;
+  background:#222;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="book-wrapper">
+  <div class="book">
+
+    <!-- FRONT COVER -->
+    <div class="page cover">
+      <div class="front">My Novel</div>
+      <div class="back">My Novel</div>
+    </div>
+
+    <!-- PAGE 1 (Left: Image, Right: Note) -->
+    <div class="page">
+      <div class="front">
+        <img src="assets/madamji1.jpeg" alt="Photo">
+      </div>
+      <div class="back">
+        <h3>Chapter 1</h3>
+        <p>When we think of the past it's the beautiful things we pick out. We want to believe it was all like that.” “Don't let the bastards grind you down.” "Better never means better for everyone."</p>
+      </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page">
+      <div class="front">
+        <img src="assets/madamji2.jpeg" alt="Photo">
+      </div>
+      <div class="back">
+        <h3>Chapter 2</h3>
+        <p>Communism deprives no man of the power to appropriate the products of society; all that is does is to deprive him of the power to subjugate the labor of others by means of such appropriation.”</p>
+      </div>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page">
+      <div class="front">
+        <img src="assets/madamji3.jpeg" alt="Photo">
+      </div>
+      <div class="back">
+        <h3>Chapter 3</h3>
+        <p>Who knows what women can be when they are finally free to become themselves? Who knows what women's intelligence will contribute when it can be nourished without denying love?” — Betty Friedan, The Feminine Mystique</p>
+      </div>
+    </div>
+    <!-- PAGE 4 -->
+    <div class="page">
+      <div class="front">
+        <img src="assets/madamji4.jpeg" alt="Photo">
+      </div>
+      <div class="back">
+        <h3>Chapter 3</h3>
+        <p>If I want to define myself, I first have to say, ‘I am a woman’; all other assertions will arise from this basic truth. A man never begins by positing himself as an individual of a certain sex: that he is a man is obvious.” — Simone de Beauvoir, The Second Sex</p>
+      </div>
+    </div>
+    <!-- PAGE 5 -->
+    <div class="page">
+      <div class="front">
+        <img src="assets/madamji5.jpeg" alt="Photo">
+      </div>
+      <div class="back">
+        <h3>Chapter 3</h3>
+        <p>Women are the quiet strength that holds the world together—resilient yet gentle, powerful yet compassionate. They carry dreams in their hearts and courage in their souls, turning pain into wisdom and struggle into grace. In every role they take on, they bring warmth, intelligence, and an unbreakable spirit, shaping lives with love and determination. To appreciate women is to honor endurance, empathy, and the endless ability to rise, again and again, with dignity and light.</p>
+      </div>
+    </div>
+
+    <!-- BACK COVER -->
+    <div class="page cover">
+      <div class="front">The End</div>
+      <div class="back">The End</div>
+    </div>
+
+  </div>
+
+  <div class="controls">
+    <button onclick="prevPage()">Previous</button>
+    <button onclick="nextPage()">Next</button>
+  </div>
+</div>
+
+<script>
+const pages = document.querySelectorAll('.page');
+let current = 0;
+
+function nextPage() {
+  if (current < pages.length) {
+    pages[current].style.zIndex = pages.length + current;
+    pages[current].classList.add('flipped');
+    current++;
+  }
+}
+
+function prevPage() {
+  if (current > 0) {
+    current--;
+    pages[current].classList.remove('flipped');
+    pages[current].style.zIndex = pages.length - current;
+  }
+}
+</script>
+
+</body>
+</html>
