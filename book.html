@@ -174,13 +174,17 @@ button {
 const pages = document.querySelectorAll('.page');
 let current = 0;
 
+/* SET INITIAL STACK ORDER */
+pages.forEach((page, index) => {
+  page.style.zIndex = pages.length - index;
+});
+
 function nextPage() {
   if (current < pages.length) {
-    pages[current].style.zIndex = pages.length + current;
     pages[current].classList.add('flipped');
+    pages[current].style.zIndex = current;
     current++;
-  }
-  else {
+  } else {
     window.location.href = "letter.html";
   }
 }
@@ -190,11 +194,10 @@ function prevPage() {
     current--;
     pages[current].classList.remove('flipped');
     pages[current].style.zIndex = pages.length - current;
-    
   }
 }
-
 </script>
+
 
 </body>
 </html>
