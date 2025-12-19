@@ -17,27 +17,24 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:url("assets/bg.jpeg");
+  background:url("assets/bg.jpeg") no-repeat center center/cover;
   font-family:Georgia, serif;
 }
 
 /* PAGE */
 .page{
   width:420px;
-  min-height:520px;
-  background:#fdfcf8;
+  height:620px;
+  background:url("assets/page.jpeg") no-repeat center center/cover;
   padding:40px;
   box-shadow:0 20px 40px rgba(0,0,0,0.4);
   border-radius:6px;
   line-height:1.8;
   font-size:18px;
-  white-space:pre-line;
-
   display:flex;
   flex-direction:column;
-  justify-content:flex-start;   /* 🔑 start from top */
+  justify-content:flex-start; /* start from top */
 }
-
 
 /* LOCK SCREEN */
 #lock{
@@ -66,6 +63,10 @@ button{
 /* LETTER */
 #letter{
   display:none;
+  white-space:pre-wrap;
+  flex: 1; /* take full available height */
+  overflow-y: auto; /* scrollable */
+  padding-right: 10px; /* space for scrollbar */
 }
 </style>
 </head>
@@ -74,6 +75,7 @@ button{
 
 <div class="page">
 
+  <!-- LOCK SCREEN -->
   <div id="lock">
     <h3>Enter Password 💌</h3>
     <input type="password" id="pw" placeholder="Password">
@@ -81,28 +83,27 @@ button{
     <p id="error"></p>
   </div>
 
+  <!-- LETTER -->
   <div id="letter"></div>
 
 </div>
 
 <script>
-const PASSWORD = "love"; // change password here
+const PASSWORD = "20122003"; // Change password here
 
+// Letter content
 const lines = [
-  "I don’t know how to begin,",
-  "",
-  "but every thought of mine",
-  "quietly leads back to you.",
-  "",
-  "This isn’t a poem or a plan,",
-  "just something my heart kept safe.",
-  "",
-  "— Always yours"
+  "First of all, Happy Birthday, Tanisha! It’s truly my pleasure to spend this phase of friendship with you. I am grateful to have you....thank you bro, for always choosing me and for never giving up on me. You are pure sunshine: the hottest baddie, a param sundari, and honestly, words aren’t enough to define your beauty. You are goal-oriented, optimistic, and determined—everything in one package. I used to think that was impossible, but you proved me wrong. You’re still stubborn with your thoughts, but I like that too. And the fact that you kept your narcissistic side aside just to be friends with me—huh, like seriously? That means a lot. I want the absolute best for you,the best things life can offer. You deserve all the good things, a truly perfect life. I sometimes hope that what we have as a friendship turns into something more… so that I can make you ditch your boyfriend—c'mon I’m joking hehehe u know I’ll be the first person to dance at your wedding, the first to cherish you, and the first to pray for your success—even if I call myself an atheist. I hope you keep chanting the mantra ('I'm  a goddess'), because the truth is—you really are. Hehehe see I accepted ,you were born for a revolution, and I know you’ll do something extraordinary someday. Time is flying—you’re 22 now. We don’t have much time to waste on useless things, so always choose the better path… which you usually do. May everything you have ever dreamed of come true. May you visit all the places you wish to see. Be happy. Be you."
 ];
 
-let line = 0, char = 0;
+const pw = document.getElementById("pw");
+const lock = document.getElementById("lock");
+const error = document.getElementById("error");
 const letter = document.getElementById("letter");
 
+let line = 0, char = 0;
+
+// Unlock function
 function unlock(){
   if(pw.value === PASSWORD){
     lock.style.display = "none";
@@ -113,16 +114,19 @@ function unlock(){
   }
 }
 
+// Typewriter effect with auto-scroll
 function typeText(){
   if(line < lines.length){
     if(char < lines[line].length){
       letter.textContent += lines[line][char++];
-      setTimeout(typeText, 50);      // typing speed
+      letter.scrollTop = letter.scrollHeight; // auto-scroll while typing
+      setTimeout(typeText, 50); // typing speed
     } else {
-      letter.textContent += "\n";
+      letter.textContent += "\n\n"; // new line after paragraph
+      letter.scrollTop = letter.scrollHeight; // scroll after paragraph
       line++;
       char = 0;
-      setTimeout(typeText, 600);     // line delay
+      setTimeout(typeText, 600); // delay between lines
     }
   }
 }

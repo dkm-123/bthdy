@@ -180,6 +180,9 @@ function nextPage() {
     pages[current].classList.add('flipped');
     current++;
   }
+  else {
+    window.location.href = "letter.html";
+  }
 }
 
 function prevPage() {
@@ -187,7 +190,7 @@ function prevPage() {
     current--;
     pages[current].classList.remove('flipped');
     pages[current].style.zIndex = pages.length - current;
-    window.location.href = "letter.html";
+    
   }
 }
 
